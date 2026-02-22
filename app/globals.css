@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  MFLIX COSMOS v5 — THE FUTURE OF STREAMING          ║
+   ║  Defeats: Netflix · Prime Video · Disney+ · Hotstar ║
+   ║  Design: Liquid Glass · Neon Depth · Cosmic Dark    ║
+   ╚══════════════════════════════════════════════════════╝ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');
+
+/* ═══════════════════════ TOKENS ═══════════════════════ */
+:root {
+  /* Space black palette */
+  --cosmos:     #000306;
+  --nebula:     #03070f;
+  --void:       #060b18;
+  --deep:       #09102a;
+  --surface:    #0d1730;
+  --card:       #101e38;
+  --card-hi:    #152240;
+  --lift:       #1c2e50;
+
+  /* Neon spectrum */
+  --nova:       #ff0a3c;   /* primary red */
+  --nova2:      #ff3d62;
+  --plasma:     #00e5ff;   /* electric cyan */
+  --ether:      #9b2dff;   /* deep violet */
+  --solar:      #ffb300;   /* amber gold */
+  --aurora:     #00ff94;   /* neon emerald */
+  --comet:      #ff6b35;   /* orange */
+  --pulsar:     #ff2d9e;   /* hot pink */
+
+  /* Glow tokens */
+  --gn: rgba(255,10,60,0.45);
+  --gp: rgba(0,229,255,0.38);
+  --ge: rgba(155,45,255,0.38);
+  --gs: rgba(255,179,0,0.32);
+  --ga: rgba(0,255,148,0.32);
+
+  /* Fonts */
+  --display: 'Syne', sans-serif;
+  --body:    'Bricolage Grotesque', sans-serif;
+}
+
+/* ═══════════════════════ RESET ═══════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; -webkit-tap-highlight-color:transparent; overscroll-behavior:none; }
+body {
+  font-family: var(--body);
+  background: var(--cosmos);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+.no-scrollbar::-webkit-scrollbar { display:none; }
+.no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+
+/* ═══════════════════════ ASPECT RATIOS ═══════════════════════ */
+.ar-hero   { aspect-ratio: 16/9; }
+.ar-poster { aspect-ratio: 2/3; }
+.ar-wide   { aspect-ratio: 16/7; }
+.ar-square { aspect-ratio: 1/1; }
+
+/* ╔══════════════════════════════════════════╗
+   ║  COSMIC PARTICLE BACKGROUND              ║
+   ║  Living animated depth — never static   ║
+   ╚══════════════════════════════════════════╝ */
+.cosmos-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+/* Slow massive nebula blobs */
+.cosmos-bg::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: -30%;
+  width: 90%; height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 50%,
+    rgba(155,45,255,0.06) 0%,
+    rgba(0,229,255,0.03) 45%,
+    transparent 70%);
+  animation: cosmoDrift1 25s ease-in-out infinite alternate;
+}
+.cosmos-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -35%; right: -20%;
+  width: 80%; height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 60% 50%,
+    rgba(0,229,255,0.05) 0%,
+    rgba(155,45,255,0.025) 50%,
+    transparent 70%);
+  animation: cosmoDrift2 30s ease-in-out infinite alternate;
+}
+@keyframes cosmoDrift1 {
+  from { transform: translate(0,0) scale(1) rotate(0deg); }
+  to   { transform: translate(8%,5%) scale(1.18) rotate(15deg); }
+}
+@keyframes cosmoDrift2 {
+  from { transform: translate(0,0) scale(1) rotate(0deg); }
+  to   { transform: translate(-6%,-8%) scale(1.12) rotate(-12deg); }
+}
+
+/* Floating particle dots */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleFloat linear infinite;
+}
+@keyframes particleFloat {
+  0%   { transform: translateY(100vh) translateX(0) scale(0); opacity:0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-100px) translateX(var(--dx,0px)) scale(1); opacity:0; }
+}
+
+/* ╔══════════════════════════════════════════╗
+   ║  LIQUID GLASS 5.0                        ║
+   ╚══════════════════════════════════════════╝ */
+.glass {
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.07) 0%,
+    rgba(255,255,255,0.025) 100%);
+  backdrop-filter: blur(32px) saturate(200%) brightness(1.08);
+  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
+}
+.glass-card {
+  background: linear-gradient(145deg,
+    rgba(16,30,56,0.94) 0%,
+    rgba(9,16,42,0.97) 100%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.glass-nav {
+  background: rgba(3,7,15,0.92);
+  backdrop-filter: blur(40px) saturate(220%);
+  -webkit-backdrop-filter: blur(40px) saturate(220%);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.glass-modal {
+  background: linear-gradient(145deg, rgba(12,20,40,0.97) 0%, rgba(6,11,24,0.99) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ══ CHROMATIC ABERRATION TEXT ══ */
+.chroma {
+  position: relative;
+}
+.chroma::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: rgba(0,229,255,0.35);
+  transform: translate(-1.5px, 0);
+  pointer-events: none;
+}
+.chroma::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: rgba(255,10,60,0.25);
+  transform: translate(1.5px, 0);
+  pointer-events: none;
+}
+
+/* ═══════════════════════ NEON SYSTEM ═══════════════════════ */
+.neon-nova   { box-shadow: 0 0 20px var(--gn), 0 0 60px rgba(255,10,60,0.12); }
+.neon-plasma { box-shadow: 0 0 20px var(--gp), 0 0 60px rgba(0,229,255,0.1); }
+.neon-ether  { box-shadow: 0 0 20px var(--ge), 0 0 60px rgba(155,45,255,0.1); }
+.neon-solar  { box-shadow: 0 0 20px var(--gs); }
+.neon-aurora { box-shadow: 0 0 20px var(--ga); }
+
+.tnova  { text-shadow: 0 0 24px rgba(255,10,60,0.75), 0 0 48px rgba(255,10,60,0.3); }
+.tplasma{ text-shadow: 0 0 20px rgba(0,229,255,0.7), 0 0 40px rgba(0,229,255,0.3); }
+.tsolar { text-shadow: 0 0 16px rgba(255,179,0,0.65), 0 0 32px rgba(255,179,0,0.25); }
+
+/* ═══════════════════════ GRADIENTS ═══════════════════════ */
+.g-hero {
+  background: linear-gradient(to top,
+    var(--cosmos) 0%,
+    rgba(0,3,6,0.96) 18%,
+    rgba(0,3,6,0.7) 45%,
+    rgba(0,3,6,0.2) 72%,
+    transparent 100%);
+}
+.g-side {
+  background: linear-gradient(to right,
+    rgba(0,3,6,0.95) 0%,
+    rgba(0,3,6,0.65) 40%,
+    transparent 72%);
+}
+.g-card {
+  background: linear-gradient(to top,
+    rgba(0,0,0,0.98) 0%,
+    rgba(0,0,0,0.6) 50%,
+    transparent 100%);
+}
+.g-nova   { background: linear-gradient(135deg, var(--nova) 0%, #7a001e 100%); }
+.g-plasma { background: linear-gradient(135deg, var(--plasma) 0%, #005fa3 100%); }
+.g-ether  { background: linear-gradient(135deg, var(--ether) 0%, #3d0080 100%); }
+.g-solar  { background: linear-gradient(135deg, var(--solar) 0%, var(--comet) 100%); }
+.g-aurora { background: linear-gradient(135deg, var(--aurora) 0%, #006644 100%); }
+.g-pulsar { background: linear-gradient(135deg, var(--pulsar) 0%, #6b0033 100%); }
+.g-multicolor { background: linear-gradient(135deg, var(--ether), var(--plasma), var(--aurora)); background-size: 200% 200%; }
+
+/* ═══════════════════════ HEADER ═══════════════════════ */
+.hdr {
+  background: linear-gradient(to bottom,
+    rgba(0,3,6,0.99) 0%,
+    rgba(0,3,6,0.88) 60%,
+    transparent 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+}
+
+/* ═══════════════════════ ANIMATIONS ═══════════════════════ */
+@keyframes fadeUp      { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn      { from{opacity:0} to{opacity:1} }
+@keyframes fadeDown    { from{opacity:0;transform:translateY(-16px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes slideUp     { from{opacity:0;transform:translateY(32px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes scaleIn     { from{opacity:0;transform:scale(.82)} to{opacity:1;transform:scale(1)} }
+@keyframes scaleInBig  { from{opacity:0;transform:scale(.6)} to{opacity:1;transform:scale(1)} }
+@keyframes float       { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes spin        { to{transform:rotate(360deg)} }
+@keyframes spinReverse { to{transform:rotate(-360deg)} }
+@keyframes shimmer     { 0%{transform:translateX(-100%)} 100%{transform:translateX(220%)} }
+@keyframes glowPulse   { 0%,100%{opacity:.6} 50%{opacity:1} }
+@keyframes dotBlink    { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+@keyframes kenburns    { from{transform:scale(1) translateX(0)} to{transform:scale(1.08) translateX(-1%)} }
+@keyframes borderGlow  {
+  0%,100% { border-color: rgba(255,10,60,0.4); box-shadow: 0 0 8px rgba(255,10,60,0.3); }
+  50%     { border-color: rgba(0,229,255,0.5); box-shadow: 0 0 16px rgba(0,229,255,0.4); }
+}
+@keyframes typewriter  { from{width:0} to{width:100%} }
+@keyframes ripple      { 0%{transform:scale(0);opacity:.5} 100%{transform:scale(4);opacity:0} }
+
+.afu  { animation: fadeUp 0.52s cubic-bezier(.22,1,.36,1) both; }
+.afi  { animation: fadeIn 0.38s ease both; }
+.afd  { animation: fadeDown 0.4s cubic-bezier(.22,1,.36,1) both; }
+.asu  { animation: slideUp 0.48s cubic-bezier(.22,1,.36,1) both; }
+.asi  { animation: scaleIn 0.4s cubic-bezier(.34,1.56,.64,1) both; }
+.asib { animation: scaleInBig .5s cubic-bezier(.34,1.56,.64,1) both; }
+.aflt { animation: float 3.8s ease-in-out infinite; }
+.asp  { animation: spin 1s linear infinite; }
+.aspR { animation: spinReverse 2s linear infinite; }
+.agp  { animation: glowPulse 2.5s ease-in-out infinite; }
+.agsh { animation: gradientShift 4s ease infinite; background-size:200% 200%; }
+
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
+.d4{animation-delay:.24s}.d5{animation-delay:.30s}.d6{animation-delay:.36s}
+.d7{animation-delay:.42s}.d8{animation-delay:.50s}.d9{animation-delay:.58s}
+
+/* ═══════════════════════ SKELETON ═══════════════════════ */
+.sk {
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.sk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.055) 50%,
+    transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+/* ═══════════════════════ BADGES ═══════════════════════ */
+.bdg {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-family: var(--body);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.bdg-nova   { background:rgba(255,10,60,.14);  border:1px solid rgba(255,10,60,.35);  color:var(--nova2); }
+.bdg-plasma { background:rgba(0,229,255,.1);   border:1px solid rgba(0,229,255,.3);   color:var(--plasma); }
+.bdg-ether  { background:rgba(155,45,255,.12); border:1px solid rgba(155,45,255,.35); color:#c17aff; }
+.bdg-solar  { background:rgba(255,179,0,.1);   border:1px solid rgba(255,179,0,.3);   color:var(--solar); }
+.bdg-aurora { background:rgba(0,255,148,.1);   border:1px solid rgba(0,255,148,.28);  color:var(--aurora); }
+.bdg-ai { background: linear-gradient(135deg,rgba(155,45,255,.2),rgba(0,229,255,.2)); border:1px solid rgba(155,45,255,.4); color:var(--plasma); }
+.bdg-lang { background:rgba(0,0,0,.7); border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.8); }
+
+/* ═══════════════════════ BUTTONS ═══════════════════════ */
+.btn-nova {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  background: linear-gradient(135deg, var(--nova) 0%, #800018 100%);
+  color: #fff; border: none; border-radius: 14px; cursor: pointer;
+  font-family: var(--body); font-weight: 800; font-size: 13px;
+  letter-spacing: .08em; text-transform: uppercase;
+  box-shadow: 0 4px 24px var(--gn), inset 0 1px 0 rgba(255,255,255,.15);
+  transition: transform .15s ease, box-shadow .2s ease;
+  position: relative; overflow: hidden;
+}
+.btn-nova::after {
+  content:''; position:absolute; inset:0;
+  background: rgba(255,255,255,0);
+  transition: background .2s;
+}
+.btn-nova:active { transform:scale(.94); }
+.btn-nova:hover::after { background: rgba(255,255,255,.06); }
+
+.btn-glass {
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.11);
+  color: rgba(255,255,255,.85);
+  border-radius: 14px; cursor: pointer;
+  font-family: var(--body); font-weight: 700; font-size: 12px;
+  backdrop-filter: blur(14px);
+  transition: transform .15s, background .2s, border-color .2s;
+}
+.btn-glass:active { transform:scale(.93); }
+.btn-glass:hover  { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.18); }
+
+/* ═══════════════════════ CARD 3D ═══════════════════════ */
+.card-lift {
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+.card-lift:hover  { transform: translateY(-5px) scale(1.035); box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 4px 16px rgba(0,0,0,.5); }
+.card-lift:active { transform: scale(.92) translateY(2px); }
+
+/* ═══════════════════════ TEXT UTILS ═══════════════════════ */
+.lc1{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.lc2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lc3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ═══════════════════════ PROGRESS ═══════════════════════ */
+.pt  { height:3px; background:rgba(255,255,255,.08); border-radius:99px; overflow:hidden; }
+.pf  { height:100%; border-radius:99px; box-shadow:0 0 8px var(--gn); background:linear-gradient(to right,var(--nova),var(--nova2)); }
+
+/* ═══════════════════════ NAV ═══════════════════════ */
+.nav-cosmos {
+  background: rgba(0,3,6,0.94);
+  backdrop-filter: blur(44px) saturate(220%);
+  -webkit-backdrop-filter: blur(44px) saturate(220%);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 40px;
+  box-shadow:
+    0 -4px 40px rgba(0,0,0,.8),
+    0 0 0 .5px rgba(255,255,255,.04),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* ═══════════════════════ AI RING ═══════════════════════ */
+.ai-ring {
+  background: conic-gradient(from 0deg, var(--ether), var(--plasma), var(--aurora), var(--solar), var(--nova), var(--ether));
+  animation: spin 5s linear infinite;
+  border-radius: 50%;
+}
+.ai-ring-rev {
+  background: conic-gradient(from 0deg, var(--plasma), var(--aurora), var(--ether));
+  animation: spinReverse 3s linear infinite;
+  border-radius: 50%;
+}
+
+/* ═══════════════════════ RIPPLE ═══════════════════════ */
+.ripple { position:relative; overflow:hidden; }
+.ripple::after {
+  content:''; position:absolute; border-radius:50%;
+  background:rgba(255,255,255,.22);
+  width:100%; aspect-ratio:1;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  opacity:0;
+}
+.ripple:active::after { animation:ripple .55s ease-out forwards; }
+
+/* ═══════════════════════ SCROLLBAR CUSTOM ═══════════════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 99px; }
+
+/* ═══════════════════════ SELECTION ═══════════════════════ */
+::selection { background: rgba(155,45,255,.4); color:#fff; }
